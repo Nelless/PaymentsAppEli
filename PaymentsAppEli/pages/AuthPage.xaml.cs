@@ -12,24 +12,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PaymentsAppEli.Model;
-using Excel = Microsoft.Office.Interop.Excel;
-using PaymentsAppEli.pages;
 
-namespace PaymentsAppEli
+namespace PaymentsAppEli.pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для AuthPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AuthPage : Page
     {
-        Core db = new Core();
-        public MainWindow()
+        public AuthPage()
         {
             InitializeComponent();
+        }
 
-            MainFrame.NavigationService.Navigate(new MainPage());
+        private void PrifileEnterBtn_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void ProfileExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainPage());
         }
     }
 }
