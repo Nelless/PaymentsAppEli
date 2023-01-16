@@ -29,6 +29,7 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Background" Value="White"/>
         </Style>
     </Page.Resources>
     <Grid>
