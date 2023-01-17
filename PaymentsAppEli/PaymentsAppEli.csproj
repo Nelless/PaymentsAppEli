@@ -167,8 +167,6 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-    <Resource Include="pages\mainpage.txt" />
-    <Resource Include="pages\mainpage_code.txt" />
     <Content Include="stuff\script.sql" />
   </ItemGroup>
   <ItemGroup>

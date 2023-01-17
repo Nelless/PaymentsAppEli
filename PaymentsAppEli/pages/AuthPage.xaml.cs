@@ -32,7 +32,10 @@ namespace PaymentsAppEli.pages
 
         private void ProfileExitBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainPage());
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
         }
     }
 }

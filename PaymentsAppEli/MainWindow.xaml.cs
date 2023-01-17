@@ -28,7 +28,7 @@ namespace PaymentsAppEli
         {
             InitializeComponent();
 
-            MainFrame.NavigationService.Navigate(new MainPage());
+            MainFrame.NavigationService.Navigate(new AuthPage());
 
         }
     }

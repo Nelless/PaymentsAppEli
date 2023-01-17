@@ -9,6 +9,50 @@
       Title="PaymentPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="260"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="AddButton" Width="42" Height="42" Content="+" FontSize="25"/>
+                <Button x:Name="DeleteButton" Width="42" Height="42" Content="-" FontSize="25"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Margin="10"> C</TextBlock>
+                <ComboBox Width="80"/>
+                <TextBlock Margin="10">По</TextBlock>
+                <ComboBox Width="80"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Margin="10">Категория:</TextBlock>
+                <ComboBox Width="70"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Width="80" Height="42" Content="Выбрать" FontSize="15"/>
+                <Button Width="80" Height="42" Content="Очистить" FontSize="15"/>
+                <Button Width="80" Height="42" Content="Отчет" FontSize="15"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView HorizontalAlignment="Left" Height="390" VerticalAlignment="Top" Width="800" Margin="-1,-1,0,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="115"/>
+                        <GridViewColumn Width="125"/>
+                        <GridViewColumn Width="120"/>
+                        <GridViewColumn Width="128"/>
+                        <GridViewColumn Width="130"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
     </Grid>
 </Page>
