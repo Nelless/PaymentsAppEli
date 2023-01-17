@@ -26,29 +26,29 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Margin="10"> C</TextBlock>
-                <ComboBox Width="80"/>
+                <ComboBox x:Name="NewDateCombobox" Width="80"/>
                 <TextBlock Margin="10">По</TextBlock>
-                <ComboBox Width="80"/>
+                <ComboBox x:Name="OldDateCombobox" Width="80"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Margin="10">Категория:</TextBlock>
-                <ComboBox Width="70"/>
+                <ComboBox x:Name="CategoryCombobox" Width="70"/>
             </StackPanel>
             <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Width="80" Height="42" Content="Выбрать" FontSize="15"/>
-                <Button Width="80" Height="42" Content="Очистить" FontSize="15"/>
-                <Button Width="80" Height="42" Content="Отчет" FontSize="15"/>
+                <Button x:Name="SelectButton" Width="80" Height="42" Content="Выбрать" FontSize="15"/>
+                <Button x:Name="ClearButton" Width="80" Height="42" Content="Очистить" FontSize="15"/>
+                <Button x:Name="ReportButton" Width="80" Height="42" Content="Отчет" FontSize="15"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <ListView HorizontalAlignment="Left" Height="390" VerticalAlignment="Top" Width="800" Margin="-1,-1,0,0">
+            <ListView>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="115"/>
-                        <GridViewColumn Width="125"/>
-                        <GridViewColumn Width="120"/>
-                        <GridViewColumn Width="128"/>
-                        <GridViewColumn Width="130"/>
+                        <GridViewColumn Width="80"></GridViewColumn>
+                        <GridViewColumn Width="85"></GridViewColumn>
+                        <GridViewColumn Width="90"></GridViewColumn>
+                        <GridViewColumn Width="95"></GridViewColumn>
+                        <GridViewColumn Width="100"></GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
