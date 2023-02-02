@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище РaymentsDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище РaymentsDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id_category" />
           </Key>
           <Property Name="id_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name_category" Type="nvarchar" MaxLength="50" />
+          <Property Name="image" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -74,18 +75,31 @@
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="РaymentsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="РaymentsDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="РaymentsDBModel.Category" />
+          <EntitySet Name="Payment" EntityType="РaymentsDBModel.Payment" />
+          <EntitySet Name="Users" EntityType="РaymentsDBModel.Users" />
+          <AssociationSet Name="FK_Pay_Category" Association="РaymentsDBModel.FK_Pay_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pay_Users" Association="РaymentsDBModel.FK_Pay_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id_category" />
           </Key>
           <Property Name="id_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name_category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK_Pay_Category" FromRole="Category" ToRole="Payment" />
+          <Property Name="image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payment" Relationship="РaymentsDBModel.FK_Pay_Category" FromRole="Category" ToRole="Payment" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -99,8 +113,8 @@
           <Property Name="count" Type="Int32" />
           <Property Name="price" Type="Double" />
           <Property Name="cost" Type="Double" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Pay_Category" FromRole="Payment" ToRole="Category" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Pay_Users" FromRole="Payment" ToRole="Users" />
+          <NavigationProperty Name="Category" Relationship="РaymentsDBModel.FK_Pay_Category" FromRole="Payment" ToRole="Category" />
+          <NavigationProperty Name="Users" Relationship="РaymentsDBModel.FK_Pay_Users" FromRole="Payment" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -113,11 +127,11 @@
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pin_code" Type="Int32" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK_Pay_Users" FromRole="Users" ToRole="Payment" />
+          <NavigationProperty Name="Payment" Relationship="РaymentsDBModel.FK_Pay_Users" FromRole="Users" ToRole="Payment" />
         </EntityType>
         <Association Name="FK_Pay_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <End Type="РaymentsDBModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="РaymentsDBModel.Payment" Role="Payment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="id_category" />
@@ -128,8 +142,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Pay_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <End Type="РaymentsDBModel.Users" Role="Users" Multiplicity="0..1" />
+          <End Type="РaymentsDBModel.Payment" Role="Payment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="id_user" />
@@ -139,20 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="РaymentsDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Category" EntityType="Self.Category" />
-          <EntitySet Name="Payment" EntityType="Self.Payment" />
-          <EntitySet Name="Users" EntityType="Self.Users" />
-          <AssociationSet Name="FK_Pay_Category" Association="Self.FK_Pay_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Pay_Users" Association="Self.FK_Pay_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -161,35 +162,36 @@
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="РaymentsDBModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="name_category" ColumnName="name_category" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payment">
             <EntityTypeMapping TypeName="РaymentsDBModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="date_payment" ColumnName="date_payment" />
-                <ScalarProperty Name="category_id" ColumnName="category_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="count" ColumnName="count" />
-                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="date_payment" ColumnName="date_payment" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="РaymentsDBModel.Users">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="patronymic_name" ColumnName="patronymic_name" />
-                <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="pin_code" ColumnName="pin_code" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="patronymic_name" ColumnName="patronymic_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

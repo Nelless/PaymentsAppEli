@@ -21,6 +21,7 @@ namespace PaymentsAppEli.Model
     
         public int id_category { get; set; }
         public string name_category { get; set; }
+        public string image { get; set; }
     
         public virtual ICollection<Payment> Payment { get; set; }
     }
